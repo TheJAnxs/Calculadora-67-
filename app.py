@@ -5,6 +5,49 @@ import pandas as pd
 
 st.set_page_config(page_title="Calculadora Tabla de la Verdad", layout="centered")
 
+# Estilo visual espacial (púrpura y celestes)
+st.markdown("""
+    <style>
+    .stApp {
+        background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+        background-attachment: fixed;
+        color: #ffffff;
+    }
+    .sidebar .stSidebar {
+        background-color: #1a153b !important;
+    }
+    h1, h2, h3 {
+        color: #00d2ff !important;
+        text-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
+    }
+    .stButton>button {
+        background: linear-gradient(90deg, #0072ff, #00c6ff);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+    .stButton>button:hover {
+        background: linear-gradient(90deg, #00c6ff, #0072ff);
+        box-shadow: 0 0 15px rgba(0, 198, 255, 0.6);
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# Información del grupo y materia en la barra lateral
+with st.sidebar:
+    st.markdown("### 🎓 Universidad de Guayaquil")
+    st.markdown("**Carrera:** Software")
+    st.markdown("**Materia:** Estructuras Discretas")
+    st.markdown("**Curso:** 1-15")
+    st.markdown("---")
+    st.markdown("### 👥 Integrantes:")
+    st.markdown("- Ivis Judith Triviño Jiménez")
+    st.markdown("- Bruno Rafael Lopez Carrera")
+    st.markdown("- Terán Lindao Juan David")
+    st.markdown("- Elias Daniel Zavala Alvaradez")
+
 st.title("📊 Calculadora de Tabla de la Verdad")
 st.write("Construye tu expresión haciendo clic. El resultado se muestra en 0 y 1.")
 
@@ -47,8 +90,7 @@ def normalizar_expresion(expr: str):
     expr = expr.replace('∨', ' or ')
     expr = expr.replace('¬', ' not ')
     expr = expr.replace('⊕', ' != ')
-    expr = expr.replace('→', ' <= ') # Implicación p->q equivale a (not p or q) / p<=q en bool
-    # Para la equivalencia bicondicional ↔ usar ==
+    expr = expr.replace('→', ' <= ')
     expr = re.sub(r'(\w+)\s*↔\s*(\w+)', r'(\1 == \2)', expr)
     expr = expr.replace('↔', ' == ')
     return expr
